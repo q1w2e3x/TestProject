@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
-
+// Модель для пользователя, требующего подтерждения
 @Component
 public class UserCandidate {
 
@@ -22,7 +22,7 @@ public class UserCandidate {
     @ValidPassword
     private String password;
 
-    //Случайно генерируемая строка для создания ссылки для подтерждения регистрации
+    //Случайно генерируемая строка для создания ссылки для подтерждения регистрации, пока пусто
     private String confirmCode;
 
     @NotNull(message = "Поле не может быть пустым")

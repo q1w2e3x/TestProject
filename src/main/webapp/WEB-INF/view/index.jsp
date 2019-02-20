@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Главная страница</title>
     <meta charset="UTF-8">
 </head>
 <body>

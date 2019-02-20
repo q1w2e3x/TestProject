@@ -14,12 +14,14 @@ import java.time.LocalDate;
 @RequestMapping("/registration")
 public class RegistrationController  {
 
+    // Запрос на форму регистрации
     @RequestMapping("/showForm")
     public String showForm(Model model) {
         model.addAttribute("userCandidate", new UserCandidate());
         return "registration/registr-form";
     }
 
+    // Обработка формы
     @RequestMapping("/processForm")
     public String processForm(@Valid @ModelAttribute("userCandidate") UserCandidate candidate, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -28,6 +30,7 @@ public class RegistrationController  {
         else {
             candidate.setRegistrationDate(LocalDate.now());
 
+            // Тут будет генерация кода, отправка почтового подтверждения и занесение кандидата в БД
 
             return "registration/form-confirmation";
         }

@@ -6,6 +6,7 @@
     <style>
         .error {color:red}
     </style>
+    <title>Форма регистрации</title>
 </head>
 <body>
     <h1>Введите необходимые данные</h1>

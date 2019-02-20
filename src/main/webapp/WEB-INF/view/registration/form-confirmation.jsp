@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
+<title>Подтверждение регистрации</title>
 <head>
 </head>
 <body>
