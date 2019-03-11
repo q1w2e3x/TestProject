@@ -20,11 +20,11 @@ public class UserCandidate {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
     @NotNull(message = "Поле не может быть пустым")
     @Length(min = 3, max = 45, message = "Длина от 3 до 45 символов")
     @Pattern(regexp = "\\w+", message = "Введены недопустимые символы")
-    @UniqueUser()
+    @UniqueUser
     private String login;
 
     @Column(name = "password")
