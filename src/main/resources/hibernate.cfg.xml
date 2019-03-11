@@ -12,9 +12,6 @@
         <property name="connection.username">test_project_user</property>
         <property name="connection.password">1234</property>
 
-        <!-- Auto create necessary tables -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">1</property>
 

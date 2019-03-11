@@ -6,18 +6,18 @@ import javax.validation.ConstraintValidatorContext;
 import static java.lang.Character.isDigit;
 
 
-// Password custom validation rule via Bean Validation Api
+// Password validation rule
+
 public class CustomPasswordValidator implements ConstraintValidator<ValidPassword, String> {
 
-   public void initialize(ValidPassword constraint) {
-   }
-
+   public void initialize(ValidPassword constraint) { }
 
    public boolean isValid(String password, ConstraintValidatorContext context) {
       if (password == null) return false;
 
       // Password must contain one uppercase/lowercase latin letter and one digit
       // Only Latin letters
+
       boolean uppercaseCheck = false, lowercaseCheck = false, digitCheck = false;
       for (Character character :
               password.toCharArray()) {

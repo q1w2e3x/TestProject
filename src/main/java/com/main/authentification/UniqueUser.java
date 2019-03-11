@@ -10,6 +10,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = LoginUniquenessValidator.class)
+
+// Annotation for checking login uniqueness among Users and UserCandidates
+
 public @interface UniqueUser {
     String message() default "Пользователь с таким логином уже существует";
 

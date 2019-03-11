@@ -34,17 +34,23 @@ public class RegistrationController  {
     // Process registration form
     @RequestMapping("/processForm")
     public String processForm(@Valid @ModelAttribute("userCandidate") UserCandidate candidate, BindingResult bindingResult) {
+
+        // If user entered incorrect information display mistake messages
+
         if (bindingResult.hasErrors()) {
             return "registration/registr-form";
         }
         else {
+            // Set current date for UserCandidate
             candidate.setRegistrationDate(LocalDate.now());
+
+            // Set UserCandidate confirmation code
             candidate.setConfirmCode(RandomStringUtils.randomAlphanumeric(7).toLowerCase());
 
             // saving user candidate to database
 
-            try (SessionFactory factory = new Configuration().configure().addAnnotatedClass(UserCandidate.class).buildSessionFactory()){
-                Session session = factory.getCurrentSession();
+            try (SessionFactory factory = new Configuration().configure().addAnnotatedClass(UserCandidate.class).buildSessionFactory();
+                    Session session = factory.getCurrentSession()){
                 session.beginTransaction();
                 session.save(candidate);
                 session.getTransaction().commit();
@@ -54,13 +60,13 @@ public class RegistrationController  {
                 e.printStackTrace();
             }
 
-            // Instead of sending emails we temporary add links to links.txt
+            // We add unique links for UserCandidate confirmation to links.txt
+
             try (BufferedWriter writer =
                          Files.newBufferedWriter(Paths.get("D:\\links.txt"), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
 
                 writer.write("http://localhost:8080/registration/confirm?login=" + candidate.getLogin()
                         + "&code=" + candidate.getConfirmCode() + "\n");
-                System.out.println("Wrote info to links.txt");
             }
             catch (IOException e) {
                 System.out.println("Couldn't write link to the file");

@@ -10,6 +10,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CustomPasswordValidator.class)
+
+// Annotation for checking password validity
+
 public @interface ValidPassword {
 
     String message() default "Пароль должен содержать " +

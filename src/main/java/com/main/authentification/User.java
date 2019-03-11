@@ -1,20 +1,23 @@
 package com.main.authentification;
 
+
+import com.main.shop.entities.Order;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-// Entity for storing user info before account confirmation
+
 @Entity
-@Table(name = "user_candidate")
-//@Component
-public class UserCandidate {
+@Table(name = "user")
+public class User {
 
+    // Left all validation rules just in case, might be useful for account info editing
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -33,10 +36,6 @@ public class UserCandidate {
     @ValidPassword
     private String password;
 
-    // Random generated string for user account confirmation
-    @Column(name = "confirm_code")
-    private String confirmCode;
-
     @Column(name = "email")
     @NotNull(message = "Поле не может быть пустым")
     @Length(max = 45, message = "Длина до 45 символов")
@@ -51,6 +50,38 @@ public class UserCandidate {
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 
+    // 1 for normal, 2 for banned
+    @Column(name = "status")
+    private short status;
+
+    @OneToMany(mappedBy = "user",
+               cascade = CascadeType.ALL,
+               fetch = FetchType.LAZY)
+    private List<Order> orders;
+
+    // Constructors
+
+    public User() {
+    }
+
+    public User(String login, String password, String email, String phone, LocalDate registrationDate, short status) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.registrationDate = registrationDate;
+        this.status = status;
+    }
+
+    // Getter and Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = (id != 1 && id != 2) ? 1 : id;
+    }
 
     public String getLogin() {
         return login;
@@ -66,14 +97,6 @@ public class UserCandidate {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmCode() {
-        return confirmCode;
-    }
-
-    public void setConfirmCode(String confirmCode) {
-        this.confirmCode = confirmCode;
     }
 
     public String getEmail() {
@@ -98,5 +121,41 @@ public class UserCandidate {
 
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(short status) {
+        this.status = status;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    // Other methods
+
+    public void addOrder(Order order) {
+        if (orders == null) orders = new ArrayList<>();
+        orders.add(order);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", status=" + status +
+                '}';
     }
 }
