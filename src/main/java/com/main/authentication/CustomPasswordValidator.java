@@ -1,4 +1,4 @@
-package com.main.authentification;
+package com.main.authentication;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

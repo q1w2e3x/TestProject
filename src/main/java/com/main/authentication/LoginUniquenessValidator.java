@@ -1,4 +1,4 @@
-package com.main.authentification;
+package com.main.authentication;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

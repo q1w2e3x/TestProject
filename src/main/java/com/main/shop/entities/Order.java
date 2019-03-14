@@ -1,6 +1,6 @@
 package com.main.shop.entities;
 
-import com.main.authentification.User;
+import com.main.authentication.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;

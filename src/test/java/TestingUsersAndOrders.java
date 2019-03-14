@@ -1,4 +1,4 @@
-import com.main.authentification.User;
+import com.main.authentication.User;
 import com.main.shop.entities.Order;
 import com.main.shop.entities.Product;
 import org.hibernate.Session;

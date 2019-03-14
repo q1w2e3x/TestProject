@@ -1,6 +1,6 @@
 package com.main.controllers;
 
-import com.main.authentification.UserCandidate;
+import com.main.authentication.UserCandidate;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
