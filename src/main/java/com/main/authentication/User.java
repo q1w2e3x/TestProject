@@ -17,7 +17,8 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 
-    // Left all validation rules just in case, might be useful for account info editing
+    // Same validation rules apply for User as for UserCandidate
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
